@@ -1,7 +1,10 @@
 import { useState } from "react";
 import GenderCheckbox from "./GenderCheckbox";
+import { Link } from "react-router-dom";
+import useSignup from '../../hooks/useSignup';
 
 const SignUp = () => {
+
     const [inputs, setInputs] = useState({
         fullName: '',
         username: '',
@@ -10,14 +13,17 @@ const SignUp = () => {
         gender: ''
     });
 
+    const { loading, signup } = useSignup();
+
     const handleCheckboxChange = (gender) => {
         setInputs({ ...inputs, gender });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        await signup(inputs)
         // Here you would usually send the data to your backend
-        console.log(inputs);
+        // console.log(inputs);
     };
 
     return (
@@ -86,12 +92,14 @@ const SignUp = () => {
                         selectedGender={inputs.gender} 
                     />
 
-                    <a className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block' href='#'>
+                    <Link to={"/login"} className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block' href='#'>
                         Already have an account?
-                    </a>
+                    </Link>
 
                     <div>
-                        <button className='btn btn-block btn-sm mt-2 border border-slate-700'>Sign Up</button>
+                        <button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled ={loading}>
+                            {loading ? <span className='loading loading-spinner'></span> : 'Sign Up'}
+                            </button>
                     </div>
 
                 </form>

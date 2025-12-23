@@ -5,11 +5,11 @@ const generateTokenAndSetCookie = (userId, res) => {
         expiresIn: '15d'
     });
 
-    res.cookie("jwt",token,{
-        maxAge: 15 * 24 *60 * 60 * 1000, //15 days
-        httpOnly: true,//prevent XSS attacks cross-site scripting attacks
-        sameSite:"strict" ,//CSRF protection
-        secure: process.env.NODE_ENV !== 'development' //set secure flag in production
+    res.cookie("jwt", token, {
+        maxAge: 15 * 24 * 60 * 60 * 1000, 
+        httpOnly: true, // Prevent XSS
+        sameSite: "strict", // "strict" is fine if on same domain, "lax" is safer for dev
+        secure: process.env.NODE_ENV !== "development", // Only true in HTTPS/Prod
     });
 };
 
