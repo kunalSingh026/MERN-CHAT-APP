@@ -1,6 +1,6 @@
-import { response } from 'express';
 import Conversation from '../models/conversation.model.js';
 import Message from '../models/message.model.js';
+import { getReceiverSocketId, io } from '../socket/socket.js';
 
 export const sendMessage = async (req, res) => {
     try {
@@ -8,7 +8,6 @@ export const sendMessage = async (req, res) => {
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
 
-        // FIX 1: $all expects an array [], not an object {}
         let conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] },
         });
@@ -29,11 +28,15 @@ export const sendMessage = async (req, res) => {
             conversation.messages.push(newMessage._id);
         }
 
-        // SOCKET IO Functionality will go here
-
-        // FIX 2: SAVE TO DATABASE
-        // This functionality will run in parallel
+        // Save conversation and message in parallel
         await Promise.all([conversation.save(), newMessage.save()]);
+
+        // REAL-TIME SOCKET IO FUNCTIONALITY
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            // io.to(<socket_id>).emit() sends event to specific client
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage);
 
@@ -43,7 +46,6 @@ export const sendMessage = async (req, res) => {
     }
 };
 
-
 export const getMessages = async (req, res) => {
     try {
         const { id: userToChatId } = req.params;
@@ -51,20 +53,17 @@ export const getMessages = async (req, res) => {
 
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, userToChatId] },
-        }).populate("messages"); // NOT REFERENCE BUT ACTUAL MESSAGES
+        }).populate("messages");
 
-        // FIX 1: Handle the case where no conversation exists yet
         if (!conversation) {
-            return res.status(200).json([]); // Return empty array
+            return res.status(200).json([]);
         }
 
         const messages = conversation.messages;
-
         res.status(200).json(messages);
 
     } catch (error) {
         console.log("Error in getMessages controller: ", error.message);
-        // FIX 2: changed 'response' to 'res' to match the function argument
         res.status(500).json({ error: "Internal server error" });
     }
-}
+};
