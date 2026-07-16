@@ -13,95 +13,89 @@ Welcome to **BRUTAL_CHAT**, a feature-rich, high-performance, real-time messagin
 *   **📦 Combined Production Setup**: Ready for production deployment with static assets compiled and served directly by the Express server.
 ---
 ## 🛠️ Technology Stack
-|
- Component 
-|
- Technology 
-|
- Description 
-|
-|
-:---
-|
-:---
-|
-:---
-|
-|
-**
-Frontend
-**
-|
- React 19 + Vite 
-|
- Fast, modern frontend framework with Hot Module Replacement (HMR) 
-|
-|
-|
- Zustand 
-|
- Client-side state manager for messages and selected conversations 
-|
-|
-|
- Tailwind CSS v4 
-|
- High-utility, custom styling framework 
-|
-|
-|
- DaisyUI v5 
-|
- Premium component classes for modern interfaces 
-|
-|
-|
- React Router DOM v7 
-|
- Client-side routing for seamless pages 
-|
-|
-|
- Socket.io-client 
-|
- Live WebSocket connection wrapper 
-|
-|
-**
-Backend
-**
-|
- Node.js + Express 
-|
- Fast, opinionated backend web framework 
-|
-|
-|
- Socket.io 
-|
- WebSocket server managing user connections and active mappings 
-|
-|
-|
- Mongoose 
-|
- Elegant MongoDB object modeling (ODM) 
-|
-|
-|
- JWT & bcryptjs 
-|
- Encrypted user security layers 
-|
-|
-**
-Database
-**
-|
- MongoDB 
-|
- Cloud-native, document-oriented NoSQL database 
-|
+
+<div align="center">
+
+| Category | Technology | Purpose |
+|:---------|:-----------|:--------|
+| **🎨 Frontend** | **React 19** | Component-based library for building a fast and interactive user interface |
+| | **Vite** | Lightning-fast development server and optimized production bundler |
+| | **Tailwind CSS v4** | Utility-first CSS framework for rapid and responsive UI development |
+| | **DaisyUI v5** | Pre-built Tailwind component library for beautiful UI components |
+| | **React Router DOM v7** | Client-side routing for seamless navigation |
+| | **Zustand** | Lightweight global state management with minimal re-renders |
+| | **Socket.io Client** | Real-time communication between the client and server |
+| | **HTML5 Audio API** | Plays incoming message notification sounds |
+| | **CSS3** | Custom Neo-Brutalist styling, animations, and responsive layouts |
+| **⚙️ Backend** | **Node.js** | JavaScript runtime environment for server-side execution |
+| | **Express.js** | RESTful API framework with middleware support |
+| | **Socket.io** | WebSocket server enabling instant messaging and live presence |
+| | **Mongoose** | Elegant MongoDB Object Data Modeling (ODM) library |
+| | **JWT (JSON Web Token)** | Stateless authentication and secure user sessions |
+| | **bcryptjs** | Password hashing and authentication security |
+| | **Cookie Parser** | HTTP-only cookie parsing and session handling |
+| **🗄️ Database** | **MongoDB** | NoSQL document database for storing users, conversations, and messages |
+| **🔐 Authentication** | **JWT + HTTP-Only Cookies** | Secure authentication with XSS protection |
+| **⚡ Real-Time Communication** | **Socket.io** | Instant messaging, typing events, and online/offline status |
+| **🧠 State Management** | **Zustand** | Efficient client-side conversation and message state management |
+| **🛠️ Development Tools** | **Git** | Version control |
+| | **GitHub** | Source code hosting and collaboration |
+| | **npm** | Package manager |
+| | **VS Code** | Primary development environment |
+
+</div>
+
+---
+
+## 🚀 Tech Stack Overview
+
+<div align="center">
+
+| Frontend | Backend | Database | Real-Time | Authentication |
+|:---------:|:-------:|:--------:|:---------:|:--------------:|
+| ⚛️ React 19 | 🟢 Node.js | 🍃 MongoDB | ⚡ Socket.io | 🔐 JWT |
+| ⚡ Vite | 🚀 Express.js | 🍃 Mongoose | 🔌 WebSockets | 🔒 bcryptjs |
+| 🎨 Tailwind CSS v4 | 🍪 Cookie Parser | | | 🍪 HTTP-Only Cookies |
+| 🌼 DaisyUI v5 | | | | |
+| 🐻 Zustand | | | | |
+
+</div>
+
+---
+
+## 🏗️ Architecture
+
+```text
+                  ┌─────────────────────────┐
+                  │      React + Vite       │
+                  │      Frontend UI        │
+                  └───────────┬─────────────┘
+                              │
+                REST API      │      WebSocket
+                              │
+          ┌───────────────────┴───────────────────┐
+          │        Express.js + Socket.io         │
+          │         Authentication & APIs         │
+          └───────────────────┬───────────────────┘
+                              │
+                        Mongoose ODM
+                              │
+                      ┌───────▼────────┐
+                      │    MongoDB     │
+                      │ Users • Chats  │
+                      │ Conversations  │
+                      │   Messages     │
+                      └────────────────┘
+```
+
+### 💡 Highlights
+
+- ⚛️ **Modern MERN Stack** powered by React 19, Node.js, Express.js, and MongoDB.
+- ⚡ **Real-Time Communication** using Socket.io with instant message delivery.
+- 🔐 **Secure Authentication** using JWT, HTTP-only cookies, and bcrypt password hashing.
+- 🐻 **Lightweight State Management** with Zustand for optimal performance.
+- 🎨 **Responsive Neo-Brutalist UI** built using Tailwind CSS v4 and DaisyUI v5.
+- 🚀 **Production Ready** with a unified frontend and backend deployment strategy.
 ---
 ## 📂 Project Structure
 ```text
