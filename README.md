@@ -1,5 +1,5 @@
-# ⚡ Connectify: MERN Real-Time Terminal
-Welcome to **BRUTAL_CHAT**, a feature-rich, high-performance, real-time messaging application built on the MERN stack. Designed with a striking **Neo-Brutalist & Cyber-Terminal aesthetic**, this application combines industrial-grade retro styling with modern real-time capabilities.
+# ⚡ Connectify: MERN Real-Time Chat App
+Welcome to **Connectify**, a feature-rich, high-performance, real-time messaging application built on the MERN stack. Designed with a striking **Neo-Brutalist & Cyber-Terminal aesthetic**, this application combines industrial-grade retro styling with modern real-time capabilities.
 ---
 ## 🚀 Key Features
 *   **⚡ Real-Time Messaging**: Built on Socket.io for instantaneous message delivery with zero polling.
