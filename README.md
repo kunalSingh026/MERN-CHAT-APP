@@ -2,14 +2,14 @@
 Welcome to **Connectify**, a feature-rich, high-performance, real-time messaging application built on the MERN stack. Designed with a striking **Neo-Brutalist & Cyber-Terminal aesthetic**, this application combines industrial-grade retro styling with modern real-time capabilities.
 ---
 ## 🚀 Key Features
-*   **⚡ Real-Time Messaging**: Built on Socket.io for instantaneous message delivery with zero polling.
-*   **🟢 Online/Offline Presence Indicators**: Real-time visual tracking of online users.
-*   **🎨 Neo-Brutalist & Cyberpunk UI**: Features high-contrast designs, thick solid borders (`var(--brutal-border)`), flat brutalist drop-shadows, monospace typography (`Space Mono`), and custom CSS micro-animations.
+*   **⚡ Real-Time Messaging**: Powered by Socket.io for instantaneous message delivery with zero polling.
+*   **🟢 Online/Offline Presence Indicators**: Real-time visual tracking of active operators.
+*   **🤖 Cyberpunk Neo-Brutalist Terminal UI**: Styled with bold black borders (`3px-4px`), 3D offset drop shadows (`5px 5px 0px #000`), tactile button press effects, terminal window header bar (`[🔴 🟡 🟢] BRUTAL_CHAT // TERMINAL_NODE`), Space Mono typography, and high-contrast Cyber Cyan (`#00FF9C`) & Gold (`#FFD700`) accents.
 *   **🔒 Secure Authentication**: JSON Web Tokens (JWT) stored in HTTP-Only cookies for cross-site scripting (XSS) prevention, along with strong password hashing using `bcryptjs`.
 *   **🛠️ Lightweight State Management**: State management handled by **Zustand** for message histories and active conversation tracking, eliminating unnecessary React re-renders.
 *   **🔊 Interactive Feedback**: Audio notification alerts on incoming messages, accompanied by visual shake effects (`.shake`).
-*   **🔍 User Search**: Sidebar filter to search and start conversations instantly.
-*   **👤 Dynamic Avatar Generation**: Auto-generates male/female avatars using the username seed via the `avatar.iran.liara.run` API.
+*   **🔍 User Search**: Sidebar search filter to search and connect with operators instantly.
+*   **👤 Dynamic Avatar & Error Fallback Engine**: Auto-generates clean user initials via `UI-Avatars API` with an inline error fallback mechanism in `<Avatar />` to prevent broken images.
 *   **📦 Combined Production Setup**: Ready for production deployment with static assets compiled and served directly by the Express server.
 ---
 ## 🛠️ Technology Stack
@@ -112,13 +112,13 @@ chat-app-yt/
 ├── frontend/
 │   ├── src/
 │   │   ├── assets/       # Static audio alerts and media
-│   │   ├── components/   # Modular React components (Sidebar, Messages, Skeletons)
+│   │   ├── components/   # Modular components (common/Avatar, Sidebar, Messages, Skeletons)
 │   │   ├── context/      # React Context providers (Auth, Socket)
 │   │   ├── hooks/        # Custom React hooks (useLogin, useListenMessages, etc.)
 │   │   ├── pages/        # Main route views (Home, Login, SignUp) & Auth.css
 │   │   ├── zustand/      # Global client-side states (useConversation)
 │   │   ├── main.jsx      # Frontend app mounter
-│   │   └── index.css     # CSS Custom properties for Neo-Brutalist theme
+│   │   └── index.css     # Cyberpunk Neo-Brutalist CSS tokens & rules
 │   └── package.json      # Frontend client-side dependencies
 ├── .env                  # Configuration variables (git ignored)
 └── package.json          # Root orchestration package scripts
