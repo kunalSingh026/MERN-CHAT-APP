@@ -23,15 +23,14 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // 3. Profile Picture Generation
-        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
+        const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=${gender === "male" ? "4f46e5" : "db2777"}&color=fff&bold=true`;
 
         const newUser = new User({
             fullName,
             username,
             password: hashedPassword, // Store the hashed password
             gender,
-            profilePic: gender === "male" ? boyProfilePic : girlProfilePic
+            profilePic: avatarUrl
         });
         
         // 4. Save User to DB and Respond

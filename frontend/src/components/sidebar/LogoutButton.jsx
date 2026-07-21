@@ -2,18 +2,21 @@ import { BiLogOut } from 'react-icons/bi';
 import useLogout from '../../hooks/useLogout';
 
 const LogoutButton = () => {
-
-    const {loading, logout} = useLogout();
+    const { loading, logout } = useLogout();
+    
     return (
-        <div className='mt-auto'>
-            {/* Fix: Added parentheses above and changed text-red to text-white (or text-red-500) */}
+        <button 
+            onClick={logout}
+            disabled={loading}
+            title="LOGOUT_SESSION"
+            className="p-2 bg-red-400 hover:bg-red-500 border-2 border-black shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none text-black font-bold transition-all flex items-center justify-center"
+        >
             {!loading ? (
-                <BiLogOut className='w-6 h-6 text-white cursor-pointer' onClick={logout}
-                 />
+                <BiLogOut className="w-5 h-5" />
             ) : (
-                <span className='loading loading-spinner'></span>
+                <span className="loading loading-spinner loading-xs text-black"></span>
             )}
-        </div>
+        </button>
     );
 };
 

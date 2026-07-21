@@ -1,5 +1,6 @@
 import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConversation";
+import Avatar from "../common/Avatar";
 
 const Conversation = ({ conversation, lastIdx, emoji }) => {
 	const { selectedConversation, setSelectedConversation } = useConversation();
@@ -9,57 +10,34 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
 	const isOnline = onlineUsers.includes(conversation._id);
 
 	return (
-		<>
-			<div
-				className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
-				${isSelected ? "bg-sky-500" : ""}
+		<div
+			className={`flex items-center gap-3 p-2.5 my-1 border-3 border-black cursor-pointer font-mono transition-all duration-150 select-none
+			${isSelected 
+				? "bg-[#00FF9C] shadow-[4px_4px_0px_#000000] translate-x-[-1px] translate-y-[-1px]" 
+				: "bg-white hover:bg-[#FFD700] hover:shadow-[3px_3px_0px_#000000] text-black"}
 			`}
-				onClick={() => setSelectedConversation(conversation)}
-			>
-				<div className={`avatar ${isOnline ? "online" : ""}`}>
-					<div className='w-12 rounded-full'>
-						<img src={conversation.profilePic} alt='user avatar' />
-					</div>
-				</div>
+			onClick={() => setSelectedConversation(conversation)}
+		>
+			<Avatar 
+				src={conversation.profilePic} 
+				name={conversation.fullName} 
+				size="w-10 h-10" 
+				isOnline={isOnline} 
+			/>
 
-				<div className='flex flex-col flex-1'>
-					<div className='flex gap-3 justify-between'>
-						<p className='font-bold text-gray-200'>{conversation.fullName}</p>
-						<span className='text-xl'>{emoji}</span>
-					</div>
+			<div className="flex flex-col flex-1 min-w-0">
+				<div className="flex justify-between items-center">
+					<p className="font-bold text-xs sm:text-sm truncate uppercase text-black">
+						{conversation.fullName}
+					</p>
+					<span className="text-base">{emoji}</span>
 				</div>
+				<p className="text-[10px] font-bold tracking-tight truncate mt-0.5 text-black opacity-80">
+					{isOnline ? "[ONLINE]" : "[OFFLINE]"}
+				</p>
 			</div>
-
-			{!lastIdx && <div className='divider my-0 py-0 h-1' />}
-		</>
+		</div>
 	);
 };
+
 export default Conversation;
-
-// STARTER CODE SNIPPET
-// const Conversation = () => {
-// 	return (
-// 		<>
-// 			<div className='flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer'>
-// 				<div className='avatar online'>
-// 					<div className='w-12 rounded-full'>
-// 						<img
-// 							src='https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
-// 							alt='user avatar'
-// 						/>
-// 					</div>
-// 				</div>
-
-// 				<div className='flex flex-col flex-1'>
-// 					<div className='flex gap-3 justify-between'>
-// 						<p className='font-bold text-gray-200'>John Doe</p>
-// 						<span className='text-xl'>🎃</span>
-// 					</div>
-// 				</div>
-// 			</div>
-
-// 			<div className='divider my-0 py-0 h-1' />
-// 		</>
-// 	);
-// };
-// export default Conversation;
