@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
-import useLogin from '../../hooks/useLogin'; // FIX: Added import (ensure file path is correct)
+import useLogin from '../../hooks/useLogin';
+import '../Auth.css';
 
 const Login = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,59 +12,68 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(username, password);
-  }; // FIX: Added closing brace here
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="h-full w-full bg-gray-0 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 p-6 shadow-md">
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
-          Login <span className="text-blue-500">ChatApp</span>
-        </h1>
+    <div className="brutal-container">
+      <div className="brutal-box">
+        {/* Terminal Header */}
+        <div className="terminal-header">
+          <span>BRUTAL_CHAT // LOGIN</span>
+          <span>v2.0-PRO</span>
+        </div>
 
-        <form onSubmit={handleSubmit} className="mt-4">
-          {/* Username Input */}
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text">Username</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Enter username"
-              className="w-full input input-bordered h-10"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)} // FIX: Changed setPassword to setUsername
-            />
-          </div>
+        <div className="terminal-content">
+          <h1 className="brutal-label" style={{ fontSize: '1.75rem', marginBottom: '24px', textAlign: 'center' }}>
+            ENTER_TERMINAL_
+          </h1>
 
-          {/* Password Input */}
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              className="w-full input input-bordered h-10"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            {/* Username Input */}
+            <div className="input-group">
+              <label className="brutal-label">USERNAME_</label>
+              <input
+                type="text"
+                placeholder="USER_ID"
+                className="brutal-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
 
-          {/* Footer Link */}
-          <Link
-            to='/signup'
-            className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
-          >
-            {"Don't"} have an account?
-          </Link>
+            {/* Password Input */}
+            <div className="input-group">
+              <label className="brutal-label">ACCESS_KEY_</label>
+              <input
+                type="password"
+                placeholder="********"
+                className="brutal-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          {/* Login Button */}
-          <div>
-            <button className="btn btn-block btn-sm mt-4" disabled={loading}>
-              {loading ? <span className='loading loading-spinner'></span> : 'Login'}
+            {/* Login Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="brutal-button"
+            >
+              {loading ? 'INITIALIZING...' : 'BYPASS_SECURITY'}
             </button>
-          </div>
-        </form>
+
+            {/* Sign Up Link */}
+            <Link to="/signup" className="brutal-link">
+              NEW_OPERATOR? REGISTER_PROTOCOL_
+            </Link>
+          </form>
+        </div>
+
+        {/* Status Bar */}
+        <div className="status-bar">
+          <span>STATUS: SYSTEM_READY</span>
+          <span>ENCRYPTION: AES-256</span>
+        </div>
       </div>
     </div>
   );

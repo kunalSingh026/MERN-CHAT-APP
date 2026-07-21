@@ -1,43 +1,37 @@
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
 import useConversation from "../../zustand/useConversation";
+import Avatar from "../common/Avatar";
 
-const Message = ({message}) => {
+const Message = ({ message }) => {
 	const { authUser } = useAuthContext();
 	const { selectedConversation } = useConversation();
 
-	// 1. Check if the message is from the logged-in user
 	const fromMe = message.senderId === authUser._id;
-
-  const formattedTime = extractTime(message.createdAt);
-
-	// 2. Determine class for alignment (Right for me, Left for them)
-	const chatClassName = fromMe ? 'chat-end' : 'chat-start';
-
-	// 3. Determine profile picture to show
+	const formattedTime = extractTime(message.createdAt);
 	const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
-
-	// 4. Determine background color (Blue for me, Gray for them)
-	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
-
+	const name = fromMe ? authUser.fullName : selectedConversation?.fullName;
 	const shakeClass = message.shouldShake ? "shake" : "";
 
-    // Optional: Format time (Simple version)
-    // const formattedTime = extractTime(message.createdAt); 
-
 	return (
-		<div className={`chat ${chatClassName}`}>
-			<div className='chat-image avatar'>
-				<div className='w-10 rounded-full'>
-					<img alt='Tailwind CSS chat bubble component' src={profilePic} />
+		<div className={`flex gap-3 my-3 items-end font-mono ${fromMe ? "flex-row-reverse" : "flex-row"}`}>
+			<Avatar src={profilePic} name={name} size="w-8 h-8" />
+			<div className={`flex flex-col max-w-[75%] sm:max-w-[65%] ${fromMe ? "items-end" : "items-start"}`}>
+				<div
+					className={`px-4 py-2.5 border-3 border-black text-xs sm:text-sm font-bold text-black ${shakeClass} ${
+						fromMe
+							? "bg-[#00FF9C] shadow-[4px_4px_0px_#000000]"
+							: "bg-white shadow-[4px_4px_0px_#000000]"
+					}`}
+				>
+					{message.message}
 				</div>
+				<span className="text-[10px] font-bold text-black mt-1 px-1 opacity-75">
+					[{formattedTime}]
+				</span>
 			</div>
-			<div className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}>{message.message}</div>
-			<div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>
-                {/* You can add time here later */}
-                {formattedTime}
-            </div>
 		</div>
 	);
 };
+
 export default Message;
